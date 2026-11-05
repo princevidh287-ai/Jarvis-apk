@@ -17,11 +17,11 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install dependencies
+    - name: Install Dependencies
       run: |
+        sudo dpkg --add-architecture i386
         sudo apt-get update
         sudo apt-get install -y \
-          python3-pip \
           build-essential \
           git \
           ffmpeg \
@@ -43,15 +43,15 @@ jobs:
           autoconf \
           libtool \
           pkg-config \
-          libncurses5-dev \
-          libncursesw5-dev \
-          libstdc++6 \
+          libncurses5:i386 \
+          libstdc++6:i386 \
+          zlib1g:i386 \
           patchelf
 
     - name: Install Buildozer and Cython
       run: |
         pip3 install --upgrade pip
-        pip3 install --user Cython==0.29.36 buildozer
+        pip3 install --user Cython==0.29.33 buildozer
 
     - name: Build APK with Buildozer
       run: |
